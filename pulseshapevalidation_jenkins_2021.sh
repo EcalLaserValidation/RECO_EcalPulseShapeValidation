@@ -18,7 +18,7 @@ year=$4
 #nevents=1000
 nevents=1000
 INSTALL=true
-RUN=false
+RUN=true
 ###############################
 
 datasetpath=`echo ${dataset} | tr '/' '_'`
