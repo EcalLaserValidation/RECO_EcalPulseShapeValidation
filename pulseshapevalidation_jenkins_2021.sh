@@ -25,7 +25,7 @@ datasetpath=`echo ${dataset} | tr '/' '_'`
 
 
 export CMSREL=CMSSW_11_2_0
-export RELNAME=TPLasVal_1120
+export RELNAME=PSVal_1120
 export SCRAM_ARCH=slc7_amd64_gcc900
 
 if ${INSTALL}; then
@@ -33,31 +33,21 @@ scram p -n $RELNAME CMSSW $CMSREL
 cd $RELNAME/src
 eval `scram runtime -sh`
 
-'''git cms-init
-git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline l1t-integration-CMSSW_11_2_0
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v105.13
-git cms-addpkg L1Trigger/Configuration
-git cms-addpkg L1Trigger/L1TMuon
-git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1TMuon/data
-git cms-addpkg L1Trigger/L1TCalorimeter
-git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
-git cms-checkdeps -A -a
+git cms-init
 
-scram b -j $(getconf _NPROCESSORS_ONLN)'''
-#git clone --depth 1 -b main https://github.com/CMS-ECAL-Trigger-Group/EcalTPGAnalysis.git
-#git clone --depth 1 -b main git@github.com:CMS-ECAL-Trigger-Group/EcalTPGAnalysis.git
-git clone --depth 1 -b main git@github.com:EcalPulseShapeValidation.git
+mkdir Validation
+cd Validation
+git clone https://gitlab.cern.ch/zghiche/EcalPulseShapeValidation.git
 export USER_CXXFLAGS="-Wno-delete-non-virtual-dtor -Wno-error=unused-but-set-variable -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=reorder"
 scram b -j $(getconf _NPROCESSORS_ONLN)
 else
 cd $RELNAME/src
 fi
 eval `scram runtime -sh`
-cd Validation/EcalPulseShapeValidation/test
+cd EcalPulseShapeValidation/test
 if ${RUN}; then
-wget http://cern.ch/ecaldpg/pulseshapes_db/ecal/EcalPulseShape_${sqlite1}.db
-wget http://cern.ch/ecaldpg/pulseshapes_db/ecal/EcalPulseShape_${sqlite2}.db
+wget http://cern.ch/ecaldpg/ecal/pulseshapes_db/EcalPulseShape_${sqlite1}.db
+wget http://cern.ch/ecaldpg/ecal/pulseshapes_db/EcalPulseShape_${sqlite2}.db
 
 
 ./runEcalPulseShape_jenkins.sh jenkins $reference $dataset $GT $nevents $sqlite1 $(getconf _NPROCESSORS_ONLN) &
