@@ -1,5 +1,8 @@
 # RECO_EcalPulseShapeValidation
 
+=> clone te repo
+	=> git clone https://github.com/EcalLaserValidation/RECO_EcalPulseShapeValidation.git
+
 => trigger the run with:
 
 	=>first edit ToRun/NewToRun.txt
