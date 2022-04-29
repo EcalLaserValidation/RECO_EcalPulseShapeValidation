@@ -37,7 +37,7 @@ git cms-init
 
 mkdir Validation
 cd Validation
-git clone https://:@gitlab.cern.ch:8443/zghiche/EcalPulseShapeValidation.git
+git clone https://gitlab.cern.ch/zghiche/EcalPulseShapeValidation.git
 export USER_CXXFLAGS="-Wno-delete-non-virtual-dtor -Wno-error=unused-but-set-variable -Wno-error=unused-variable -Wno-error=sign-compare -Wno-error=reorder"
 scram b -j $(getconf _NPROCESSORS_ONLN)
 else
