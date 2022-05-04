@@ -16,7 +16,7 @@ sqlite2=$2
 week=$3
 year=$4
 #nevents=1000
-nevents=1000
+nevents=100
 INSTALL=true
 RUN=true
 ###############################
@@ -56,22 +56,22 @@ wait
 ./runEcalPulseShape_jenkins.sh jenkins $reference $dataset $GT $nevents $sqlite2 $(getconf _NPROCESSORS_ONLN) &
 wait
 fi
-cp addhist_jenkins_2021.sh log_and_results/${reference}_${datasetpath}_PS_IOV_${sqlite1}_batch/.
-pushd log_and_results/${reference}_${datasetpath}_PS_IOV_${sqlite1}_batch/
+cp addhist_jenkins_2021.sh log_and_results/${reference}${datasetpath}_PS_IOV_${sqlite1}_batch/.
+pushd log_and_results/${reference}${datasetpath}_PS_IOV_${sqlite1}_batch/
 ./addhist_jenkins_2021.sh ${sqlite1} &
 popd
-cp addhist_jenkins_2021.sh log_and_results/${reference}_${datasetpath}_PS_IOV_${sqlite2}_batch/.
-pushd log_and_results/${reference}_${datasetpath}_PS_IOV_${sqlite2}_batch/
+cp addhist_jenkins_2021.sh log_and_results/${reference}${datasetpath}_PS_IOV_${sqlite2}_batch/.
+pushd log_and_results/${reference}${datasetpath}_PS_IOV_${sqlite2}_batch/
 ./addhist_jenkins_2021.sh ${sqlite2} &
 popd
 wait
 
-mv log_and_results/${reference}_${datasetpath}_PS_IOV_${sqlite1}_batch/EcalSlimValidationMiniaod_${sqlite1}.root ../macro/.
+mv log_and_results/${reference}${datasetpath}_PS_IOV_${sqlite1}_batch/EcalSlimValidationMiniaod_${sqlite1}.root ../macro/.
 
 #wget http://cern.ch/ecaltrg/ReferenceNTuples/TPG/newhistoTPG_${sqlite1}.root  
 #mv newhistoTPG_${sqlite1}.root ../../TPGPlotting/plots/.
 
-mv log_and_results/${reference}_${datasetpath}_PS_IOV_${sqlite2}_batch/EcalSlimValidationMiniaod_${sqlite2}.root ../macro/.
+mv log_and_results/${reference}${datasetpath}_PS_IOV_${sqlite2}_batch/EcalSlimValidationMiniaod_${sqlite2}.root ../macro/.
 
 cd ../macro/
 
