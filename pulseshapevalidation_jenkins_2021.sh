@@ -16,7 +16,7 @@ sqlite2=$2
 week=$3
 year=$4
 #nevents=1000
-nevents=100
+nevents=1000
 INSTALL=true
 RUN=true
 ###############################
